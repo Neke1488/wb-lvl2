@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tetris Game</title>
+    <link rel="stylesheet" href="/tetris/src/style.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <canvas id="desk"></canvas>
+        <div class="statistic_wrap">
+            <div class="statistic">
+                <h1 class="gameName">Tetris</h1>
+                <p class="score">Score: <span class="scoreNumber">0</span></p>
+            </div>
+            <button onclick="start()" class="startGame">START</button>
+        </div>
+    </div>
+
+    
+  
+</body>
+<script src="/tetris/src/js/blocks.js"></script>
+<script src="/tetris/src/js/configuration.js"></script>
+<script src="/tetris/src/js/desk.js"></script>
+<script src="/tetris/src/js/main.js"></script>
+</html>
