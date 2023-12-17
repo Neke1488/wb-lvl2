@@ -1,5 +1,6 @@
 * {
     font-family: 'Press Start 2P';
+    background-color: #8458B3;
 }
 
 .wrapper {
@@ -18,8 +19,33 @@
 }
 
 .startGame {
+    position: relative;
+    overflow-x: hidden;
     background-color: blueviolet;
     font-size: 16px;
     padding: 15px 30px;
     cursor: pointer;
+    border-radius: 10px;
+    border: 1px solid black;
+}
+
+.startGame .flare {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 45px;
+    transform: skewX(-45deg);
+    animation: flareAnimation;
+    left: -150%;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.4));
+    animation: flareAnimation 3s infinite linear;
+}
+
+@keyframes flareAnimation {
+    0% {
+        left: -150%;
+    }
+    100% {
+        left: 150%;
+    }
 }

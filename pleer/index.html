@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>player</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <main class="wrapper">
+        <div class="player">
+            <button class="playBtn">
+                <img class="playBtnIcon" src="./assets/icons/play.svg" alt="Play Button">
+            </button>
+            <div class="playerInside">
+                <p class="title">Artist - Track</p>
+                <div id="waveform" class="waveform"></div>
+                <div class="controls">
+                    <div class="volume">
+                        <img class="vlmIcon" src="./assets/icons/volume.svg" alt="Volume"/>
+                        <input class="slider" type="range" name="volumeRegulation" min="0"
+                        max="100" value="50"/>
+                    </div>
+                    <div class="timecode">
+                        <span class="time">00:00:00</span>
+                        <span>/</span>
+                        <span class="totalRange">00:00:00</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script type="module" src="https://unpkg.com/wavesurfer.js/dist/wavesurfer.min.js"></script>
+    <script type="module" src="./src/main.js"></script>
+</body>
+</html>
