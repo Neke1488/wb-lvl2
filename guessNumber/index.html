@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="wrapper">
+        <div class="places">
+            <h1 class="text">Укажите диапазон</h1>
+            <p class="rangeText">Минимальный диапазон</p>
+            <input type="number" class="minRange" value="1">
+            <p class="rangeText">Максимальный диапазон</p>
+            <input type="number" class="maxRange">
+            <button class="setRange">Готово</button>
+            <div class="answer">
+                <p class="rangeGuess"></p>
+                <input type="number" class="guess">
+                <button class="myAnswer">Попытка</button>
+                <p class="winOrNo"></p>
+                <p class="hint"></p>
+                <p class="try">Попытка:<span class="numberTry"></span></p>
+            </div>
+            <button class="newGame">Новая игра</button>
+        </div>
+    </div>
+    <script src="./src/main.js"></script>
+</body>
+</html>

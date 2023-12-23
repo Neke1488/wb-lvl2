@@ -1,0 +1,97 @@
+* {
+    background-color: #f5f6fa;
+}
+
+.wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.text {
+    display: flex;
+    justify-content: center;
+}
+
+.minRange {
+    display: flex;
+    justify-content: center;
+    width: 360px;
+    background: #fff;
+    font-family: 'Courier New', Courier, monospace ;
+    box-shadow: 0 6px 10px 0 rgba(0, 0, 0 , .1);
+    border: 0;
+    outline: 0;
+    padding: 22px 18px;
+}
+
+.maxRange {
+    display: flex;
+    justify-content: center;
+    width: 360px;
+    background: #fff;
+    font-family: 'Courier New', Courier, monospace ;
+    box-shadow: 0 6px 10px 0 rgba(0, 0, 0 , .1);
+    border: 0;
+    outline: 0;
+    padding: 22px 18px;
+}
+
+.guess {
+    display: flex;
+    justify-content: center;
+    width: 360px;
+    background: #fff;
+    font-family: 'Courier New', Courier, monospace ;
+    box-shadow: 0 6px 10px 0 rgba(0, 0, 0 , .1);
+    border: 0;
+    outline: 0;
+    padding: 22px 18px;
+}
+
+.rangeText {
+    display: flex;
+    justify-content: center;
+    font-family: 'Courier New', Courier, monospace ;
+}
+
+.setRange {
+    display: flex;
+    justify-content: center;
+    background: #7f8ff4;
+    color: #fff;
+    font-family: 'Courier New', Courier, monospace;
+    border-radius: 2px;
+    padding: 12px 36px;
+}
+
+.myAnswer {
+    display: flex;
+    justify-content: center;
+    background: #7f8ff4;
+    color: #fff;
+    font-family: 'Courier New', Courier, monospace;
+    border-radius: 2px;
+    padding: 12px 36px;
+}
+
+.newGame {
+    display: flex;
+    justify-content: center;
+    background: #7f8ff4;
+    color: #fff;
+    font-family: 'Courier New', Courier, monospace;
+    border-radius: 2px;
+    padding: 12px 36px;
+}
+
+.try {
+    font-family: 'Courier New', Courier, monospace ;
+}
+
+.winOrNo {
+    font-family: 'Courier New', Courier, monospace ;
+}
+
+.hint {
+    font-family: 'Courier New', Courier, monospace ;
+}

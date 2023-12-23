@@ -1,0 +1,38 @@
+body {
+    background-color: #b7d530;
+}
+
+.wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.addImage {
+    background-color: rgb(228, 45, 13);
+    border-radius: 10px;
+    color: white;
+}
+
+.btnAdd {
+  background-color: rgb(228, 45, 13);
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 15px;
+}
+
+.btnSave {
+    background-color: rgb(228, 45, 13);
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 15px;
+}

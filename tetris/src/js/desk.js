@@ -15,7 +15,7 @@ class Desk {
 
     showNewBlock() {
         this.next = new Block(this.viewNextElem);
-        this.viewNextElem.clearRect(0, 0, this.viewNextElem.width, this.viewNextElem.height);
+        this.viewNextElem.clearRect(0, 0, viewNextElem.canvas.width, viewNextElem.canvas.height);
         this.next.draw();
     }
 

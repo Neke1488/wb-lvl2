@@ -91,3 +91,19 @@ body {
     -webkit-appearance: none;
     background: transparent;
 }
+
+.playlistTitle {
+    display: flex;
+    justify-content: center;
+}
+
+.playlistList {
+    margin: 30px;
+    list-style: none;
+}
+
+.playlistWrapper {
+    width: 500px;
+    background-color: #8D297F;
+    border-radius: 15px;
+}
