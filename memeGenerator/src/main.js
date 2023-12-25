@@ -42,15 +42,15 @@ addText.addEventListener('click', () => {
             content: textContent,
             font: font,
             color: color,
-            x: 80,
-            y: 30
+            x: 20,
+            y: 90
         };
         text.push(textElem);
         textOnPhoto();
 
         canvas.addEventListener('mousedown', (event) => {
             const positionX = event.clientX - canvas.getBoundingClientRect().left;
-            const posititonY = event.clientY - canvas.getBoundingClientRect().right;
+            const posititonY = event.clientY - canvas.getBoundingClientRect().top;
             text.forEach(textElem => {
                 const widthElement = ctx.measureText(textElem.content).width;
                 const heightElement = parseInt(textElem.font);
@@ -58,13 +58,13 @@ addText.addEventListener('click', () => {
                     let removePosition = false;
                     canvas.addEventListener('mousemove', (event) => {
                         if (removePosition) {
-                        const newPositionX = event.clientX - canvas.getBoundingClientRect().left;
-                        const newPositionY = event.clientY - canvas.getBoundingClientRect().top;
-                    
-                        textElem.x = newPositionX - widthElement / 2;
-                        textElem.y = newPositionY + heightElement / 2;
+                            const newPositionX = event.clientX - canvas.getBoundingClientRect().left;
+                            const newPositionY = event.clientY - canvas.getBoundingClientRect().top;
 
-                        showPicture();
+                            textElem.x = newPositionX - widthElement / 2;
+                            textElem.y = newPositionY + heightElement / 2;
+
+                            showPicture();
                         }
                     });
                     canvas.addEventListener('mouseup', function () {

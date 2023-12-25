@@ -1,38 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tic Tac Toe</title>
-    <link rel="stylesheet" href="./style.css" />
-  </head>
-  <body>
-    <h1 class="name">Крестики-нолики</h1>
-    <div class="gameMode">
-      <div class="gameModeBot">
-        <input type="radio" class="playerBot" name="gameModeChoose"/>
-        <span>Игра против компьютера</span>
-      </div>
-      <div class="gameModePlayer">
-        <input type="radio" class="checkbox playerPlayer" name="gameModeChoose" />
-        <span>Игра против другого игрока</span>
-      </div>
-    </div>
-    <div class="gameDifficult">
-        <div class="easyMode">
-            <input type="radio" class="easyModeDifficult" />
-            <span>Легкий режим</span>
-        </div>
-        <div class="hardMode">
-            <input type="radio" class="hardModeDifficult" />
-            <span>Сложный режим</span>
-        </div>
-    </div>
-    <div class="newGame">
-      <button class="newGameButton">Новая игра</button>
-    </div>
 
-    <div class="place"></div>
-    <script src="./src/main.js"></script>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tic Tac Toe</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+
+<body>
+  <h1 class="name">Крестики-нолики</h1>
+  <div class="gameMode">
+    <div class="gameModeBot">
+      <input type="radio" class="playerBot" name="gameModeChoose" />
+      <span>Игра против компьютера</span>
+    </div>
+    <div class="gameModePlayer">
+      <input type="radio" class="checkbox playerPlayer" name="gameModeChoose" />
+      <span>Игра против другого игрока</span>
+    </div>
+  </div>
+  <div class="gameDifficult">
+    <div class="easyMode">
+      <input type="radio" class="easyModeDifficult" name="modeDifficult" />
+      <span>Легкий режим</span>
+    </div>
+    <div class="hardMode">
+      <input type="radio" class="hardModeDifficult" name="modeDifficult" />
+      <span>Сложный режим</span>
+    </div>
+  </div>
+  <div class="newGame">
+    <button class="newGameButton">Новая игра</button>
+  </div>
+
+  <div class="place"></div>
+  <script src="./src/main.js"></script>
+</body>
+
 </html>

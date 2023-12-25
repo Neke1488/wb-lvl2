@@ -7,13 +7,13 @@ view.scale(block_size, block_size);
 //с помощью spread оператора переносим их в объект, а дальше меняем значение координаты на 1 
 //чтобы фигура в будущем опускалась вниз или перемещалась в стороны
 const control = {
-    [keys.down]: place => ({ ...place, y: place.y + 1}),
-    [keys.left]: place => ({ ...place, x: place.x - 1}),
-    [keys.right]: place => ({ ...place, x: place.x + 1}),   
-    [keys.space]: place => ({ ...place, y: place.y + 1}),
+    [keys.down]: place => ({ ...place, y: place.y + 1 }),
+    [keys.left]: place => ({ ...place, x: place.x - 1 }),
+    [keys.right]: place => ({ ...place, x: place.x + 1 }),
+    [keys.space]: place => ({ ...place, y: place.y + 1 }),
     [keys.up]: (place) => desk.rotate(place)
 };
-const time = { start: 0, elapsed: 0, level: 1000};
+const time = { start: 0, elapsed: 0, level: 1000 };
 let storageScore = { score: 0, }
 let gameOverInfo;
 const nextElem = document.getElementById('next');
@@ -37,7 +37,7 @@ function animate(now = 0) {
     if (time.elapsed > time.level) {
         time.start = now;
 
-        if(!desk.drop()) {
+        if (!desk.drop()) {
             gameOver();
             return;
         }
@@ -72,22 +72,22 @@ let updateScoreInfo = new Proxy(storageScore, {
     }
 });
 
-    document.addEventListener('keydown', event => {
-        if (control[event.keyCode]) {
-            event.preventDefault();
-    
-            let place = control[event.keyCode](desk.block);
-            if (event.keyCode === keys.space) {
-                while (desk.check(place)) {
-                    updateScoreInfo.score += points.fastFall;
-                    desk.block.coordinates(place);
-                    place = control[keys.down](desk.block);
-                }
-            } else if (desk.check(place)) {
+document.addEventListener('keydown', event => {
+    if (control[event.keyCode]) {
+        event.preventDefault();
+
+        let place = control[event.keyCode](desk.block);
+        if (event.keyCode === keys.space) {
+            while (desk.check(place)) {
+                updateScoreInfo.score += points.fastFall;
                 desk.block.coordinates(place);
-                if (event.keyCode === keys.down) {
-                    updateScoreInfo.score += points.simpleFall;
-                }
+                place = control[keys.down](desk.block);
+            }
+        } else if (desk.check(place)) {
+            desk.block.coordinates(place);
+            if (event.keyCode === keys.down) {
+                updateScoreInfo.score += points.simpleFall;
             }
         }
-    })
+    }
+})

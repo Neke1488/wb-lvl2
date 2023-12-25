@@ -1,36 +1,166 @@
 const desk = document.querySelector(".place");
+const gameModeChoose = document.getElementsByName("gameModeChoose");
+const difficultChoose = document.getElementsByName("modeDifficult");
 const newGameButton = document.querySelector(".newGameButton");
-const cells = [];
+let cells = [];
 let firstWay = "X";
 let secondWay = "O";
 let step = firstWay;
 const chooseMode = {
-    hard: 'hard',
-    easy: 'easy'
+  hard: 'hard',
+  easy: 'easy'
 };
+const chooseType = {
+  players: 'player',
+  bot: 'bot'
+}
 let mode;
+let typeGame;
 let gameOver = false;
 
+
 document.querySelector(".easyModeDifficult").onclick = () => {
-    mode = chooseMode.easy;
+  mode = chooseMode.easy;
 }
 
 document.querySelector(".hardModeDifficult").onclick = () => {
-    mode = chooseMode.hard;
-    console.log('213', mode);
+  mode = chooseMode.hard;
 }
 
 
+
 document.querySelector(".playerBot").onclick = function gameModeBot() {
+  typeGame = chooseType.bot;
+  if (this.checked) {
+    cells = [];
+    const gameData = localStorage.getItem('gameData');
+    console.log('123123213123123', gameData);
+    if (gameData?.cells) {
+      loadGame();
+      console.log('123123', cells);
+      cells = cells.map((cellContent) => {
+        const cell = document.createElement("div");
+        cell.classList.add("cell");
+        cell.textContent = cellContent;
+        desk.appendChild(cell);
+
+        cell.addEventListener("click", () => {
+          if (cell.textContent === "" && step === firstWay && !gameOver) {
+            cell.textContent = step;
+            cell.style.cursor = "not-allowed";
+
+            if (checkWin(step)) {
+              alert(step + "победил!");
+              gameOver = true;
+            } else if (checkDraw()) {
+              alert("Ничья!");
+              gameOver = true;
+            } else {
+              step = secondWay;
+              setTimeout(() => botMove(mode), 200);
+            }
+          }
+        });
+      })
+    } else {
+      for (let i = 0; i < 9; i++) {
+        const cell = document.createElement("div");
+        cell.classList.add("cell");
+        cells.push(cell);
+        desk.appendChild(cell);
+
+        cell.addEventListener("click", () => {
+          if (cell.textContent === "" && step === firstWay && !gameOver) {
+            cell.textContent = step;
+            cell.style.cursor = "not-allowed";
+
+            if (checkWin(step)) {
+              alert(step + "победил!");
+              gameOver = true;
+            } else if (checkDraw()) {
+              alert("Ничья!");
+              gameOver = true;
+            } else {
+              step = secondWay;
+              setTimeout(() => botMove(mode), 200);
+            }
+          }
+        });
+      }
+    }
+
+    function botMove(mode) {
+      if (mode === chooseMode.easy) {
+        const emptyCells = cells.filter((cell) => cell.textContent === "");
+        if (emptyCells.length > 0 && step === secondWay) {
+          const randomIndex = Math.floor(Math.random() * emptyCells.length);
+          const botCell = emptyCells[randomIndex];
+          botCell.textContent = step;
+          botCell.style.cursor = "not-allowed";
+
+          if (checkWin(step)) {
+            alert(step + "победил!");
+            gameOver = true;
+          } else if (checkDraw()) {
+            alert("Ничья!");
+            gameOver = true;
+          } else {
+            step = firstWay;
+            saveGame();
+          }
+        }
+      } else if (mode === chooseMode.hard) {
+        if (step === secondWay) {
+          if (cells[4].textContent === '') {
+            cells[4].textContent = secondWay;
+          } else {
+            const corners = [0, 2, 6, 8];
+            const cornersEmpty = corners.filter((index) => cells[index].textContent === '');
+
+            if (cornersEmpty.length > 0) {
+              const standCorner = cornersEmpty[Math.floor(Math.random() * cornersEmpty.length)];
+              cells[standCorner].textContent = secondWay;
+            } else {
+              const randomCells = [...cells].filter((cell) => cell.textContent === '');
+              if (randomCells.length > 0) {
+                const randomIndexCells = Math.floor(Math.random() * randomCells.length);
+                console.log('secondway', randomCells[randomIndexCells]);
+                randomCells[randomIndexCells].textContent = secondWay;
+              }
+            }
+
+          }
+          // for(let i = 0; i < cells.length; i++) {
+          //     botCell = cells[i];
+          //     botCell.textContent = secondWay;
+          // }
+          if (checkWin(secondWay)) {
+            alert(secondWay + "победил!");
+            gameOver = true;
+          } else if (checkDraw()) {
+            alert("Ничья!");
+            gameOver = true;
+          } else {
+            step = firstWay;
+            saveGame();
+          }
+        }
+      }
+    }
+  }
+};
+
+
+document.querySelector(".playerPlayer").onclick = function gameModePlayer() {
+  typeGame = chooseType.players;
   if (this.checked) {
     for (let i = 0; i < 9; i++) {
       const cell = document.createElement("div");
       cell.classList.add("cell");
       cells.push(cell);
       desk.appendChild(cell);
-
       cell.addEventListener("click", () => {
-        if (cell.textContent === "" && firstWay === "X" && !gameOver) {
+        if (cell.textContent === "" && step === firstWay && !gameOver) {
           cell.textContent = firstWay;
           cell.style.cursor = "not-allowed";
 
@@ -41,89 +171,26 @@ document.querySelector(".playerBot").onclick = function gameModeBot() {
             alert("Ничья!");
             gameOver = true;
           } else {
-            firstWay = "O";
-            setTimeout(() => botMove(mode), 200);
+            step = secondWay;
+            saveGame();
+          }
+        } else if (cell.textContent === "" && step === secondWay && !gameOver) {
+          cell.textContent = secondWay;
+          cell.style.cursor = "not-allowed";
+
+          if (checkWin(secondWay)) {
+            alert(secondWay + "победил!");
+            gameOver = true;
+          } else if (checkDraw()) {
+            alert("Ничья!");
+            gameOver = true;
+          } else {
+            step = firstWay;
+            saveGame();
           }
         }
       });
     }
-
-    function botMove(mode) {
-      const emptyCells = cells.filter((cell) => cell.textContent === "");
-    if (mode === chooseMode.easy) {
-      if (emptyCells.length > 0 && firstWay === "O") {
-        const randomIndex = Math.floor(Math.random() * emptyCells.length);
-        const botCell = emptyCells[randomIndex];
-        botCell.textContent = firstWay;
-        botCell.style.cursor = "not-allowed";
-
-        if (checkWin(firstWay)) {
-          alert(firstWay + "победил!");
-          gameOver = true;
-        } else if (checkDraw()) {
-          alert("Ничья!");
-          gameOver = true;
-        } else {
-          firstWay = "X";
-        }
-      }
-    } else if (mode === chooseMode.hard) {
-        console.log('1123', mode);
-        for(let i = 0; i < emptyCells.length; i++) {
-            botCell = emptyCells[i];
-            botCell.textContent = secondWay;
-            if(cells[i]){
-                continue;
-            }
-            cells[i] = firstWay;
-            if (!cells[4]) {
-                botCell = cells[4];
-            }
-        }
-    }
-    }
-  }
-};
-
-
-document.querySelector(".playerPlayer").onclick = function gameModePlayer() {
-  if (this.checked) {
-    for (let i = 0; i < 9; i++) {
-        const cell = document.createElement("div");
-        cell.classList.add("cell");
-        cells.push(cell);
-        desk.appendChild(cell);
-        cell.addEventListener("click", () => {
-          if (cell.textContent === "" && step === firstWay && !gameOver) {
-            cell.textContent = firstWay;
-            cell.style.cursor = "not-allowed";
-
-            if (checkWin(firstWay)) {
-              alert(firstWay + "победил!");
-              gameOver = true;
-            } else if (checkDraw()) {
-              alert("Ничья!");
-              gameOver = true;
-            } else {
-              step = secondWay;
-            //localstorage.setItem(cells, cells);
-            }
-          } else if (cell.textContent === "" && step === secondWay && !gameOver) {
-            cell.textContent = secondWay;
-            cell.style.cursor = "not-allowed";
-  
-            if (checkWin(secondWay)) {
-              alert(secondWay + "победил!");
-              gameOver = true;
-            } else if (checkDraw()) {
-              alert("Ничья!");
-              gameOver = true;
-            } else {
-              step = firstWay;
-            }
-          }
-        });
-      }
   }
 };
 
@@ -137,6 +204,38 @@ document.querySelector(".playerPlayer").onclick = function gameModePlayer() {
 //   gameOver = false;
 // }
 
+function saveGame() {
+  if (gameOver) {
+    localStorage.removeItem('gameData');
+    return;
+  }
+  const gameData = {
+    settings: {
+      mode: typeGame,
+      difficult: mode,
+    },
+    cells: cells.map((cell) => cell.textContent),
+  };
+
+  localStorage.setItem('gameData', JSON.stringify(gameData))
+}
+
+function loadGame() {
+  const gameDataJSON = localStorage.getItem('gameData');
+  if (!gameDataJSON) {
+    return
+  }
+  const gameData = JSON.parse(gameDataJSON);
+  for (const modeButtons of gameModeChoose) {
+    modeButtons.checked = modeButtons.value === gameData.settings.mode;
+  }
+  if (gameData.settings.difficult === chooseMode) {
+    for (const difficultButtons of difficultChoose) {
+      difficultButtons.checked = difficultButtons.value === gameData.settings.difficult;
+    }
+  }
+  cells = gameData.cells;
+}
 
 function checkWin(player) {
   const winResult = [

@@ -21,7 +21,7 @@ class Desk {
 
     emptyDesk() {
         return Array.from(
-            {length: height}, () => Array(columns).fill(0)
+            { length: height }, () => Array(columns).fill(0)
         );
     }
 
@@ -34,15 +34,15 @@ class Desk {
             });
         });
     }
-//проверка на столкновение со стеной
+    //проверка на столкновение со стеной
     walls(x) {
         return x >= 0 && x < columns;
     }
-//проверка на столкновение с полом
+    //проверка на столкновение с полом
     floor(y) {
         return y <= height;
     }
-//проверка на столкновение с фигурой
+    //проверка на столкновение с фигурой
     figuresHere(x, y) {
         return this.row[y] && this.row[y][x] === 0;
     }
@@ -55,7 +55,7 @@ class Desk {
                 [place.figure[x][y], place.figure[y][x]] = [place.figure[y][x], place.figure[x][y]];
             }
         }
-    
+
         place.figure.forEach(grid => grid.reverse());
 
         return place;
@@ -87,7 +87,7 @@ class Desk {
             if (this.block.y === 0) {
                 return false;
             }
-            this.block = this.next;            
+            this.block = this.next;
             this.block.view = this.view;
             this.block.firstPosition();
             this.showNewBlock();
@@ -106,10 +106,10 @@ class Desk {
     }
 
     getDeletePoles(poles) {
-        return poles === 1 ? points.one : 
-               poles === 2 ? points.double :
-               poles === 3 ? points.triple :
-               poles === 4 ? points.tetris : 0;
+        return poles === 1 ? points.one :
+            poles === 2 ? points.double :
+                poles === 3 ? points.triple :
+                    poles === 4 ? points.tetris : 0;
     }
 
     deletePoles() {

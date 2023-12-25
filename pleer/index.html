@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>player</title>
     <link rel="stylesheet" href="./style.css">
 </head>
+
 <body>
     <main class="wrapper">
         <div class="player">
@@ -19,9 +21,8 @@
                 </div>
                 <div class="controls">
                     <div class="volume">
-                        <img class="vlmIcon" src="./assets/icons/volume.svg" alt="Volume"/>
-                        <input class="slider" type="range" name="volumeRegulation" min="0"
-                        max="100" value="50"/>
+                        <img class="vlmIcon" src="./assets/icons/volume.svg" alt="Volume" />
+                        <input class="slider" type="range" name="volumeRegulation" min="0" max="100" value="50" />
                     </div>
                     <div class="timecode">
                         <span class="time">00:00:00</span>
@@ -32,14 +33,14 @@
             </div>
         </div>
         <div class="playlistWrapper">
-        <div class="playlist">
-            <h3 class="playlistTitle">Плейлист</h3>
-            <div class="playlistWrap">
-                <ul class="playlistList">
-                </ul>
+            <div class="playlist">
+                <h3 class="playlistTitle">Плейлист</h3>
+                <div class="playlistWrap">
+                    <ul class="playlistList">
+                    </ul>
+                </div>
             </div>
         </div>
-    </div>
     </main>
 
     <template class="songs">
@@ -50,4 +51,5 @@
     <script type="module" src="https://unpkg.com/wavesurfer.js@7/dist/wavesurfer.js"></script>
     <script type="module" src="./src/main.js"></script>
 </body>
+
 </html>

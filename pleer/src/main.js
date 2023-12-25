@@ -12,13 +12,13 @@ const slider = document.querySelector(".slider");
 const time = document.querySelector(".time");
 const totalRange = document.querySelector(".totalRange");
 const songName = ['bamba', 'Lil Tjay feat. Fivio Foreign, Pop Smoke-Zoo York',
-'Playboi Carti-Pop Bottles', 'Russ Millions-6 30', 'YoungBoy Never Broke Again - 7 Days']
+    'Playboi Carti-Pop Bottles', 'Russ Millions-6 30', 'YoungBoy Never Broke Again - 7 Days']
 let indexSong;
 
 if (localStorage.getItem('currentSong')) {
     indexSong = JSON.parse(localStorage.getItem('currentSong'));
 } else {
-    indexSong = 0;
+    indexSong = songName;
 }
 
 const wavesurfer = WaveSurfer.create({
@@ -26,7 +26,7 @@ const wavesurfer = WaveSurfer.create({
     height: 100,
     waveColor: '#4F4A85',
     progressColor: '#383351',
-  })
+})
 
 
 function turnPlay() {
@@ -95,7 +95,7 @@ function showSongs(songName) {
 playlist.addEventListener('click', chooseSong);
 
 function saveLocalStorage(key, value) {
-    localStorage.setItem(key,JSON.stringify(value));
+    localStorage.setItem(key, JSON.stringify(value));
 }
 
 saveLocalStorage('currentSong', indexSong);
