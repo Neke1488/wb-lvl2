@@ -33,9 +33,9 @@ document.querySelector(".playerBot").onclick = function gameModeBot() {
   typeGame = chooseType.bot;
   if (this.checked) {
     cells = [];
+    desk.innerHTML = null;
     const gameData = localStorage.getItem('gameData');
-    console.log('123123213123123', gameData);
-    if (gameData?.cells) {
+    if (gameData) {
       loadGame();
       console.log('123123', cells);
       cells = cells.map((cellContent) => {
@@ -61,6 +61,7 @@ document.querySelector(".playerBot").onclick = function gameModeBot() {
             }
           }
         });
+        return cell;
       })
     } else {
       for (let i = 0; i < 9; i++) {
@@ -128,12 +129,7 @@ document.querySelector(".playerBot").onclick = function gameModeBot() {
                 randomCells[randomIndexCells].textContent = secondWay;
               }
             }
-
           }
-          // for(let i = 0; i < cells.length; i++) {
-          //     botCell = cells[i];
-          //     botCell.textContent = secondWay;
-          // }
           if (checkWin(secondWay)) {
             alert(secondWay + "победил!");
             gameOver = true;
@@ -154,55 +150,74 @@ document.querySelector(".playerBot").onclick = function gameModeBot() {
 document.querySelector(".playerPlayer").onclick = function gameModePlayer() {
   typeGame = chooseType.players;
   if (this.checked) {
-    for (let i = 0; i < 9; i++) {
-      const cell = document.createElement("div");
-      cell.classList.add("cell");
-      cells.push(cell);
-      desk.appendChild(cell);
-      cell.addEventListener("click", () => {
-        if (cell.textContent === "" && step === firstWay && !gameOver) {
-          cell.textContent = firstWay;
-          cell.style.cursor = "not-allowed";
+    cells = [];
+    desk.innerHTML = null;
+    const gameDataPlayer = localStorage.getItem('gameData');
+    if (gameDataPlayer) {
+      loadGame();
+      cells = cells.map((cellContent) => {
+        const cell = document.createElement("div");
+        cell.classList.add("cell");
+        cell.textContent = cellContent;
+        desk.appendChild(cell);
 
-          if (checkWin(firstWay)) {
-            alert(firstWay + "победил!");
-            gameOver = true;
-          } else if (checkDraw()) {
-            alert("Ничья!");
-            gameOver = true;
-          } else {
-            step = secondWay;
-            saveGame();
-          }
-        } else if (cell.textContent === "" && step === secondWay && !gameOver) {
-          cell.textContent = secondWay;
-          cell.style.cursor = "not-allowed";
+        cell.addEventListener("click", () => {
+          if (cell.textContent === "" && step === firstWay && !gameOver) {
+            console.log('1231dfdsf23', step);
+            cell.textContent = step;
+            cell.style.cursor = "not-allowed";
 
-          if (checkWin(secondWay)) {
-            alert(secondWay + "победил!");
-            gameOver = true;
-          } else if (checkDraw()) {
-            alert("Ничья!");
-            gameOver = true;
-          } else {
-            step = firstWay;
-            saveGame();
+            if (checkWin(step)) {
+              alert(step + "победил!");
+              gameOver = true;
+            } else if (checkDraw()) {
+              alert("Ничья!");
+              gameOver = true;
+            } else {
+              step = secondWay;
+              saveGame();
+            }
           }
-        }
-      });
+        });
+        return cell;
+      })
+    } else {
+      for (let i = 0; i < 9; i++) {
+        const cell = document.createElement("div");
+        cell.classList.add("cell");
+        cells.push(cell);
+        desk.appendChild(cell);
+        
+        cell.addEventListener('click', () => {
+          if (cell.textContent === "" && step === secondWay && !gameOver) {
+            cell.textContent = step;
+            cell.style.cursor = "not-allowed";
+
+            if (checkWin(step)) {
+              alert(step + "победил!");
+              gameOver = true;
+            } else if (checkDraw()) {
+              alert("Ничья!");
+              gameOver = true;
+            } else {
+              step = firstWay;
+              saveGame();
+            }
+          }
+        })
+      }
     }
   }
-};
+}
 
-// function newGame() {
-//   cells.forEach((cell) => {
-//     cell.сlassName = "";
-//     cells.unshift(cell);
-//     desk.remove(cell);
-//   });
-//   firstWay = "X";
-//   gameOver = false;
-// }
+
+function newGame() {
+  cells.forEach((cell) => {
+    cell.textContent = "";
+  });
+  step = firstWay;
+  gameOver = false;
+}
 
 function saveGame() {
   if (gameOver) {
@@ -257,3 +272,4 @@ function checkDraw() {
   return cells.every((cell) => cell.textContent !== "");
 }
 
+newGameButton.addEventListener("click", newGame);
